@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR Latte on Book</title>
-    <!-- Use the latest versions of A-Frame and AR.js -->
+    <title>AR Latte on Table</title>
+    <!-- Load A-Frame and AR.js -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js@1.7.2/aframe/build/aframe-ar.min.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs="sourceType: webcam;">
       
-      <!-- Define your GLTF asset -->
+      <!-- Load Latte Model -->
       <a-assets>
         <a-asset-item id="latte-model" src="models/latte_model.glb"></a-asset-item>
       </a-assets>
       
-      <!-- AR Marker -->
+      <!-- AR Marker (Placed on the Table) -->
       <a-marker preset="hiro">
-        <!-- Use your GLTF model -->
-        <a-entity gltf-model="#latte-model" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+        <!-- Latte Model with Correct Position, Scale, and Rotation -->
+        <a-entity 
+          gltf-model="#latte-model" 
+          position="0 0.1 0"   <!-- Raise slightly above the marker -->
+          scale="0.2 0.2 0.2"  <!-- Adjust to realistic size -->
+          rotation="-90 0 0">  <!-- Fix potential model orientation -->
+        </a-entity>
       </a-marker>
 
-      <!-- AR Camera -->
+      <!-- AR Camera for Proper Perspective -->
       <a-entity camera></a-entity>
       
     </a-scene>
