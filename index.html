@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+</head>
+<body>
+    <div id="qr-reader" style="width: 500px; height: 500px;"></div>
+<button onclick="startQRCodeScan()">Start Scanning</button>
+
+</body>
+</html>
+
+
+<script>
+    function startQRCodeScan() {
+  const qrCodeReader = new Html5Qrcode("qr-reader");
+
+  // Start the QR Code scanner
+  qrCodeReader.start(
+    { facingMode: "environment" },  // camera setting
+    {
+      fps: 10, // Scan 10 frames per second
+      qrbox: 250, // Box size
+    },
+    (decodedText, decodedResult) => {
+      // When QR code is scanned
+      handleQRCodeScan(decodedText);
+    },
+    (errorMessage) => {
+      // Handle errors (optional)
+      console.error(errorMessage);
+    }
+  );
+}
+
+function handleQRCodeScan(decodedText) {
+  // Now, decodedText is the QR code data
+  // You would typically call an API or retrieve data related to the QR code
+  console.log(decodedText);  // This will print the QR code content (which could be the item ID or cafe info)
+  
+  // Example: Navigate to the AR content based on the QR code data
+  loadARContent(decodedText);  // Function to load AR content based on QR code data
+}
+
+</script>
