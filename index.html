@@ -1,50 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-
-</head>
-<body>
-    <div id="qr-reader" style="width: 500px; height: 500px;"></div>
-<button onclick="startQRCodeScan()">Start Scanning</button>
-
-</body>
+<html>
+  <head>
+    <title>AR Latte on Book</title>
+    <!-- Use the latest compatible versions of A-Frame and AR.js -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs="sourceType: webcam;">
+    
+      
+      <!-- define your gltf asset -->
+<a-assets>
+  <a-asset-item id="tree" src="models/latte_model.glb"></a-asset-item>
+</a-assets>
+<!-- use your gltf model -->
+<a-entity gltf-model="##tree"></a-entity>
+      
+      <!-- Marker for camera tracking -->
+      <a-marker-camera preset="hiro"></a-marker-camera>
+    </a-scene>
+  </body>
 </html>
-
-
-<script>
-    function startQRCodeScan() {
-  const qrCodeReader = new Html5Qrcode("qr-reader");
-
-  // Start the QR Code scanner
-  qrCodeReader.start(
-    { facingMode: "environment" },  // camera setting
-    {
-      fps: 10, // Scan 10 frames per second
-      qrbox: 250, // Box size
-    },
-    (decodedText, decodedResult) => {
-      // When QR code is scanned
-      handleQRCodeScan(decodedText);
-    },
-    (errorMessage) => {
-      // Handle errors (optional)
-      console.error(errorMessage);
-    }
-  );
-}
-
-function handleQRCodeScan(decodedText) {
-  // Now, decodedText is the QR code data
-  // You would typically call an API or retrieve data related to the QR code
-  console.log(decodedText);  // This will print the QR code content (which could be the item ID or cafe info)
-  
-  // Example: Navigate to the AR content based on the QR code data
-  loadARContent(decodedText);  // Function to load AR content based on QR code data
-}
-
-</script>
